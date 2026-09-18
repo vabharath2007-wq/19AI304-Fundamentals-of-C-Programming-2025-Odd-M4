@@ -41,7 +41,54 @@
 ### Step 14: 
   Stop
 # Program:
+```c
+    #include <stdio.h>
+    
+    int main()
+    {
+        int day, month, year;
+        int maxDays;
+    
+        printf("Enter date (DD/MM/YYYY): ");
+        scanf("%d/%d/%d", &day, &month, &year);
+    
+        if(month < 1 || month > 12 || year < 1)
+        {
+            printf("Invalid Date\n");
+            return 0;
+        }
+    
+        switch(month)
+        {
+            case 1: case 3: case 5: case 7:
+            case 8: case 10: case 12:
+                maxDays = 31;
+                break;
+    
+            case 4: case 6: case 9: case 11:
+                maxDays = 30;
+                break;
+    
+            case 2:
+                if((year % 400 == 0) ||
+                   (year % 4 == 0 && year % 100 != 0))
+                    maxDays = 29;
+                else
+                    maxDays = 28;
+                break;
+        }
+    
+        if(day >= 1 && day <= maxDays)
+            printf("Valid Date\n");
+        else
+            printf("Invalid Date\n");
+    
+        return 0;
+    }
+```
 # Output:
+<img width="592" height="277" alt="image" src="https://github.com/user-attachments/assets/69371785-fef9-4b69-ae6c-6ac9bfa2e7c1" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -89,7 +136,41 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 13: 
   Stop
 # Program:
+```c
+    #include <stdio.h>
+    
+    int max(int a, int b)
+    {
+        if(a > b)
+            return a;
+        else
+            return b;
+    }
+    
+    int min(int a, int b)
+    {
+        if(a < b)
+            return a;
+        else
+            return b;
+    }
+    
+    int main()
+    {
+        int num1, num2;
+    
+        printf("Enter two numbers: ");
+        scanf("%d %d", &num1, &num2);
+    
+        printf("Maximum = %d\n", max(num1, num2));
+        printf("Minimum = %d\n", min(num1, num2));
+    
+        return 0;
+    }
+```
 # Output:
+<img width="445" height="353" alt="image" src="https://github.com/user-attachments/assets/f0b6971b-2241-478a-8362-19df4fed7b27" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -137,7 +218,41 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11: 
  Stop
 # Program:
+```c
+    #include <stdio.h>
+    
+    float celsiusToFahrenheit(float celsius)
+    {
+        return (celsius * 9.0 / 5.0) + 32;
+    }
+    
+    float fahrenheitToCelsius(float fahrenheit)
+    {
+        return (fahrenheit - 32) * 5.0 / 9.0;
+    }
+    
+    int main()
+    {
+        float celsius, fahrenheit;
+    
+        printf("Enter temperature in Celsius: ");
+        scanf("%f", &celsius);
+    
+        printf("Enter temperature in Fahrenheit: ");
+        scanf("%f", &fahrenheit);
+    
+        printf("%.2f Celsius = %.2f Fahrenheit\n",
+               celsius, celsiusToFahrenheit(celsius));
+    
+        printf("%.2f Fahrenheit = %.2f Celsius\n",
+               fahrenheit, fahrenheitToCelsius(fahrenheit));
+    
+        return 0;
+    }
+```
 # Output:
+<img width="797" height="246" alt="image" src="https://github.com/user-attachments/assets/ef8ec7f3-72a2-4f57-b53d-77d7ee9f2cb1" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -185,7 +300,68 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 7: 
   Stop
 # Program:
+```c
+    #include <stdio.h>
+    
+    void spiralPrint(int a[4][4])
+    {
+        int top = 0, bottom = 3;
+        int left = 0, right = 3;
+        int i;
+    
+        printf("Spiral Order: ");
+    
+        while(top <= bottom && left <= right)
+        {
+            for(i = left; i <= right; i++)
+                printf("%d ", a[top][i]);
+            top++;
+    
+            for(i = top; i <= bottom; i++)
+                printf("%d ", a[i][right]);
+            right--;
+    
+            if(top <= bottom)
+            {
+                for(i = right; i >= left; i--)
+                    printf("%d ", a[bottom][i]);
+                bottom--;
+            }
+    
+            if(left <= right)
+            {
+                for(i = bottom; i >= top; i--)
+                    printf("%d ", a[i][left]);
+                left++;
+            }
+        }
+    
+        printf("\n");
+    }
+    
+    int main()
+    {
+        int a[4][4];
+        int i, j;
+    
+        printf("Enter the elements of 4x4 matrix:\n");
+    
+        for(i = 0; i < 4; i++)
+        {
+            for(j = 0; j < 4; j++)
+            {
+                scanf("%d", &a[i][j]);
+            }
+        }
+    
+        spiralPrint(a);
+    
+        return 0;
+    }
+```
 # Output:
+<img width="697" height="602" alt="image" src="https://github.com/user-attachments/assets/7380cbf1-fcc9-43ca-b4a0-b07fab3059a1" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -220,7 +396,54 @@ To build a C program to convert a string as described above, using a user-define
 ### Step 6: 
  Stop
 # Program:
+```c
+    #include <stdio.h>
+    #include <string.h>
+    #include <ctype.h>
+    
+    void convert(char str[])
+    {
+        int i, len;
+    
+        len = strlen(str);
+    
+        if(len > 0)
+        {
+            str[0] = toupper(str[0]);
+            str[len - 1] = toupper(str[len - 1]);
+        }
+    
+        for(i = 1; i < len - 1; i++)
+        {
+            if(str[i] == ' ')
+            {
+                str[i - 1] = toupper(str[i - 1]);
+    
+                if(str[i + 1] != '\0')
+                    str[i + 1] = toupper(str[i + 1]);
+            }
+        }
+    
+        printf("Modified String: %s\n", str);
+    }
+    
+    int main()
+    {
+        char str[100];
+    
+        printf("Enter a string: ");
+        fgets(str, sizeof(str), stdin);
+    
+        str[strcspn(str, "\n")] = '\0';
+    
+        convert(str);
+    
+        return 0;
+    }
+```
 # Output:
+<img width="603" height="238" alt="image" src="https://github.com/user-attachments/assets/8c879635-3f47-41c6-8373-4aecc77ae47e" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
